@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import React, { FC } from 'react';
 import Sidebar from '../sidebar/Sidebar';
+import Header from '../header/Header';
 
 type PageLayoutProps = {
 	className?: string;
@@ -28,7 +29,7 @@ const PageLayout: FC<PageLayoutProps> = ({ className, children }) => {
 		<div className={cn('h-screen w-screen flex', className)}>
 			<Sidebar />
 			<div className='flex flex-col w-full'>
-				<div className='w-full h-16 bg-red-300'></div>
+				<Header />
 				<main className='flex-1'>{children}</main>
 			</div>
 		</div>
