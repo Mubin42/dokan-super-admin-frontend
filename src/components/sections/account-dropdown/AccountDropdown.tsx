@@ -36,7 +36,7 @@ const AccountDropdown: FC<AccountDropdownProps> = ({ children }) => {
 			<DropdownMenuContent align='end'>
 				<DropdownMenuLabel>
 					<div className='flex flex-col'>
-						<h1 className='text-sm'>Kazi Ehsanul Mubin</h1>
+						<h1 className='text-sm font-semibold'>Kazi Ehsanul Mubin</h1>
 						<Badge className='w-fit'>Admin</Badge>
 					</div>
 				</DropdownMenuLabel>
