@@ -1,8 +1,5 @@
 'use client';
-import Image from 'next/image';
-
-import { ChevronLeft, Upload } from 'lucide-react';
-
+import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,24 +11,15 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
-
 import {
 	FormLeftRows,
 	FormParentRow,
 	FormRightRows,
 	FormSection,
 } from '@/components/sections/forms/form-layout';
+
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import moment from 'moment';
@@ -40,7 +28,9 @@ import {
 	CustomDateRangePicker,
 	CustomCheckbox,
 } from '@/components/sections/from-elements';
+
 import { toast } from '@/components/ui/use-toast';
+import { Switch } from '@/components/ui/switch';
 
 // Date input -> Done
 // Date range input -> Done
@@ -49,20 +39,20 @@ import { toast } from '@/components/ui/use-toast';
 // Input -> Initialized
 // Select -> Initialized
 // Textarea -> Initialized
+// Switch -> Initialized
 
-// Email input
+// Email input -> Initialized
 // Radio buttons
-// Button
-// Colored inputs
+
 // File
 // Range input
 // Password input
 // Input type=image
-// Switch
 
 function Dashboard() {
 	const [date, setDate] = useState<Date | undefined>();
 	const [checkboxData, setCheckboxData] = useState<string[]>();
+	const [switchData, setSwitchData] = useState<boolean>(false);
 
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
 		from: new Date(2022, 0, 20),
@@ -128,88 +118,27 @@ function Dashboard() {
 							className='min-h-32'
 						/>
 					</div>
+					<div className='grid gap-3'>
+						<Label htmlFor='description'>Switch Example</Label>
+						<Switch checked={switchData} onCheckedChange={(value) => setSwitchData(value)} />
+					</div>
 				</FormSection>
 
-				<FormSection title='Stock' description='Lipsum dolor sit amet, consectetur adipiscing elit'>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead className='w-[100px]'>SKU</TableHead>
-								<TableHead>Stock</TableHead>
-								<TableHead>Price</TableHead>
-								<TableHead className='w-[100px]'>Size</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							<TableRow>
-								<TableCell className='font-semibold'>GGPC-001</TableCell>
-								<TableCell>
-									<Label htmlFor='stock-1' className='sr-only'>
-										Stock
-									</Label>
-									<Input id='stock-1' type='number' defaultValue='100' />
-								</TableCell>
-								<TableCell>
-									<Label htmlFor='price-1' className='sr-only'>
-										Price
-									</Label>
-									<Input id='price-1' type='number' defaultValue='99.99' />
-								</TableCell>
-								<TableCell>
-									<ToggleGroup type='single' defaultValue='s' variant='outline'>
-										<ToggleGroupItem value='s'>S</ToggleGroupItem>
-										<ToggleGroupItem value='m'>M</ToggleGroupItem>
-										<ToggleGroupItem value='l'>L</ToggleGroupItem>
-									</ToggleGroup>
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell className='font-semibold'>GGPC-002</TableCell>
-								<TableCell>
-									<Label htmlFor='stock-2' className='sr-only'>
-										Stock
-									</Label>
-									<Input id='stock-2' type='number' defaultValue='143' />
-								</TableCell>
-								<TableCell>
-									<Label htmlFor='price-2' className='sr-only'>
-										Price
-									</Label>
-									<Input id='price-2' type='number' defaultValue='99.99' />
-								</TableCell>
-								<TableCell>
-									<ToggleGroup type='single' defaultValue='m' variant='outline'>
-										<ToggleGroupItem value='s'>S</ToggleGroupItem>
-										<ToggleGroupItem value='m'>M</ToggleGroupItem>
-										<ToggleGroupItem value='l'>L</ToggleGroupItem>
-									</ToggleGroup>
-								</TableCell>
-							</TableRow>
-							<TableRow>
-								<TableCell className='font-semibold'>GGPC-003</TableCell>
-								<TableCell>
-									<Label htmlFor='stock-3' className='sr-only'>
-										Stock
-									</Label>
-									<Input id='stock-3' type='number' defaultValue='32' />
-								</TableCell>
-								<TableCell>
-									<Label htmlFor='price-3' className='sr-only'>
-										Stock
-									</Label>
-									<Input id='price-3' type='number' defaultValue='99.99' />
-								</TableCell>
-								<TableCell>
-									<ToggleGroup type='single' defaultValue='s' variant='outline'>
-										<ToggleGroupItem value='s'>S</ToggleGroupItem>
-										<ToggleGroupItem value='m'>M</ToggleGroupItem>
-										<ToggleGroupItem value='l'>L</ToggleGroupItem>
-									</ToggleGroup>
-								</TableCell>
-							</TableRow>
-						</TableBody>
-					</Table>
+				<FormSection title='Different Type Input'>
+					<div className='grid gap-3'>
+						<Label htmlFor='price'>Number</Label>
+						<Input type='number' defaultValue='100' />
+					</div>
+					<div className='grid gap-3'>
+						<Label htmlFor='quantity'>Email</Label>
+						<Input type='password' defaultValue='100' />
+					</div>
+					<div className='grid gap-3'>
+						<Label htmlFor='discount'>Discount</Label>
+						<Input type='file' defaultValue='10' />
+					</div>
 				</FormSection>
+
 				<FormSection title='Product Category'>
 					<div className='grid gap-6 sm:grid-cols-3'>
 						<div className='grid gap-3'>
@@ -307,7 +236,7 @@ function Dashboard() {
 	return (
 		<PageLayout currentPage='Order'>
 			<form onSubmit={onSubmit}>
-				<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 '>
+				<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8'>
 					<div className='mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4'>
 						{title}
 						{formRows}

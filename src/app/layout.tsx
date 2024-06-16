@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/layouts/providers/theme-provider/ThemeProvider';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +18,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={inter.className}>
+			<body
+				className={inter.className}
+				style={{
+					overflowX: 'hidden',
+					overflowY: 'hidden',
+				}}
+			>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
@@ -26,6 +33,7 @@ export default function RootLayout({
 				>
 					{children}
 				</ThemeProvider>
+				<Toaster />
 			</body>
 		</html>
 	);
