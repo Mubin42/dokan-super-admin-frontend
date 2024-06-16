@@ -24,10 +24,13 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
-import FormSection from '@/components/sections/forms/form-layout/FormSection';
-import FormLeftRows from '@/components/sections/forms/form-layout/FormLeftRows';
-import FormRightRows from '@/components/sections/forms/form-layout/FormRightRows';
-import FormParentRow from '@/components/sections/forms/form-layout/FormParentRow';
+
+import {
+	FormLeftRows,
+	FormParentRow,
+	FormRightRows,
+	FormSection,
+} from '@/components/sections/forms/form-layout';
 
 function Dashboard() {
 	const title = (
