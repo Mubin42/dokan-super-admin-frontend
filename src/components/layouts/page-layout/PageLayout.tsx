@@ -31,7 +31,7 @@ const PageLayout: FC<PageLayoutProps> = ({ className, children, currentPage }) =
 			<Sidebar currentPage={currentPage} />
 			<div className='flex flex-col w-full'>
 				<Header />
-				<main className='flex-1 p-4 overflow-auto'>{children}</main>
+				<main className='flex-1 sm:p-4 bg-muted/40 overflow-auto'>{children}</main>
 			</div>
 		</div>
 	);

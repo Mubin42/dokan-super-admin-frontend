@@ -1,6 +1,6 @@
 import SearchInput from '@/components/end-component/inputs/search-input/SearchInput';
 import { Button } from '@/components/ui/button';
-import { CardHeader } from '@/components/ui/card';
+import { CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
 	Select,
 	SelectContent,
@@ -9,7 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { ChevronLeftIcon, ChevronRightIcon, RotateCcw } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon, PlusIcon, RotateCcw } from 'lucide-react';
 import React, { FC, useState } from 'react';
 
 type PaginationProps = {};
@@ -75,12 +75,10 @@ const Pagination: FC<PaginationProps> = ({}) => {
 	);
 
 	return (
-		<CardHeader className='px-7 '>
-			<div className='flex justify-between'>
-				{left}
-				{right}
-			</div>
-		</CardHeader>
+		<div className='flex w-full justify-between'>
+			{left}
+			{right}
+		</div>
 	);
 };
 

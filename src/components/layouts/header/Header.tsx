@@ -34,7 +34,7 @@ const Header: FC<HeaderProps> = ({}) => {
 	);
 
 	return (
-		<header className='flex h-16 w-full items-center gap-4 border-b bg-background px-4'>
+		<header className='hidden h-16 w-full items-center gap-4 border-b bg-background px-4 md:flex'>
 			<h1 className='text-xl font-bold'>Dokan Admin App</h1>
 			<div className='relative ml-auto flex-1 md:grow-0'>
 				<Search className='absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground' />
