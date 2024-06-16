@@ -47,8 +47,8 @@ import PageLayout from '@/components/layouts/page-layout/PageLayout';
 
 const Home: NextPage = () => {
 	return (
-		<PageLayout>
-			<div className='grid flex-1 items-start p-4 gap-8 grid-cols-3'>
+		<PageLayout currentPage='Home'>
+			<div className='grid flex-1 items-start gap-8 grid-cols-3'>
 				<div className='grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2'>
 					<div className='grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4'>
 						<Card className='sm:col-span-2' x-chunk='dashboard-05-chunk-0'>

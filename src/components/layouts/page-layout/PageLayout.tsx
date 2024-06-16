@@ -6,9 +6,10 @@ import Header from '../header/Header';
 type PageLayoutProps = {
 	className?: string;
 	children: React.ReactNode;
+	currentPage: string;
 };
 
-const PageLayout: FC<PageLayoutProps> = ({ className, children }) => {
+const PageLayout: FC<PageLayoutProps> = ({ className, children, currentPage }) => {
 	// api
 
 	// hooks
@@ -26,11 +27,11 @@ const PageLayout: FC<PageLayoutProps> = ({ className, children }) => {
 	// components
 
 	return (
-		<div className={cn('h-screen w-screen flex', className)}>
-			<Sidebar />
+		<div className={cn('h-screen w-screen flex overflow-y-hidden', className)}>
+			<Sidebar currentPage={currentPage} />
 			<div className='flex flex-col w-full'>
 				<Header />
-				<main className='flex-1'>{children}</main>
+				<main className='flex-1 p-4 overflow-auto'>{children}</main>
 			</div>
 		</div>
 	);
