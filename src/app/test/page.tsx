@@ -27,7 +27,9 @@ import {
 	CustomDatePicker,
 	CustomDateRangePicker,
 	CustomCheckbox,
-} from '@/components/sections/from-elements';
+	CustomRadioGroup,
+	CustomSelect,
+} from '@/components/sections/forms/from-elements';
 
 import { toast } from '@/components/ui/use-toast';
 import { Switch } from '@/components/ui/switch';
@@ -50,26 +52,42 @@ import { Switch } from '@/components/ui/switch';
 // Input type=image
 
 function Dashboard() {
-	const [date, setDate] = useState<Date | undefined>();
-	const [checkboxData, setCheckboxData] = useState<string[]>();
+	const [name, setName] = useState<string>('');
+	const [description, setDescription] = useState<string>('');
 	const [switchData, setSwitchData] = useState<boolean>(false);
 
+	const [number, setNumber] = useState<number | undefined>();
+	const [email, setEmail] = useState<string | undefined>();
+
+	const [selectData, setSelectData] = useState<string | undefined>();
+
+	const [date, setDate] = useState<Date | undefined>();
+	const [checkboxData, setCheckboxData] = useState<string[]>();
+
+	const [radioData, setRadioData] = useState<string | undefined>();
+
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
-		from: new Date(2022, 0, 20),
-		to: moment(new Date(2022, 0, 20)).add(20, 'days').toDate(),
+		from: new Date(),
+		to: moment(new Date()).add(20, 'days').toDate(),
 	});
 
-	const onSubmit = (
-		e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>
-	) => {
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const data = {
+			name,
+			description,
+			switchData,
+			number,
+			email,
+			selectData,
+			radioData,
 			date,
 			dateRange,
 			checkboxData,
 		};
 		toast({
 			title: 'You submitted the following values:',
+			duration: 2000,
 			description: (
 				<pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
 					<code className='text-white'>{JSON.stringify(data, null, 2)}</code>
@@ -79,10 +97,13 @@ function Dashboard() {
 	};
 
 	const checkboxOptions = ['food', 'drinks', 'electronics'];
+	const radioOptions = ['male', 'female', 'other'];
+
+	const selectOptions = ['draft', 'published', 'archived'];
 
 	const title = (
 		<div className='flex items-center gap-4'>
-			<Button variant='outline' size='icon' className='h-7 w-7'>
+			<Button variant='outline' size='icon' className='h-7 w-7' type='button'>
 				<ChevronLeft className='h-4 w-4' />
 				<span className='sr-only'>Back</span>
 			</Button>
@@ -90,7 +111,7 @@ function Dashboard() {
 				Pro Controller
 			</h1>
 			<div className='hidden items-center gap-2 md:ml-auto md:flex'>
-				<Button variant='outline' size='sm'>
+				<Button variant='outline' size='sm' type='button'>
 					Discard
 				</Button>
 				<Button size='sm' type='submit'>
@@ -108,14 +129,15 @@ function Dashboard() {
 					description='Lipsum dolor sit amet, consectetur adipiscing elit'
 				>
 					<div className='grid gap-3'>
-						<Label htmlFor='name'>Name</Label>
-						<Input type='text' defaultValue='Gamer Gear Pro Controller' />
+						<Label>Name</Label>
+						<Input type='text' value={name} onChange={(e) => setName(e.target.value)} />
 					</div>
 					<div className='grid gap-3'>
-						<Label htmlFor='description'>Description</Label>
+						<Label>Description</Label>
 						<Textarea
-							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
 							className='min-h-32'
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
 					<div className='grid gap-3'>
@@ -126,48 +148,25 @@ function Dashboard() {
 
 				<FormSection title='Different Type Input'>
 					<div className='grid gap-3'>
-						<Label htmlFor='price'>Number</Label>
-						<Input type='number' defaultValue='100' />
+						<Label>Number</Label>
+						<Input
+							type='number'
+							value={number}
+							onChange={(e) => setNumber(parseInt(e.target.value))}
+						/>
 					</div>
 					<div className='grid gap-3'>
-						<Label htmlFor='quantity'>Email</Label>
-						<Input type='password' defaultValue='100' />
+						<Label>Email</Label>
+						<Input type='password' value={email} onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className='grid gap-3'>
 						<Label htmlFor='discount'>Discount</Label>
-						<Input type='file' defaultValue='10' />
+						<Input type='file' />
 					</div>
 				</FormSection>
 
 				<FormSection title='Product Category'>
-					<div className='grid gap-6 sm:grid-cols-3'>
-						<div className='grid gap-3'>
-							<Label htmlFor='category'>Category</Label>
-							<Select>
-								<SelectTrigger id='category' aria-label='Select category'>
-									<SelectValue placeholder='Select category' />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value='clothing'>Clothing</SelectItem>
-									<SelectItem value='electronics'>Electronics</SelectItem>
-									<SelectItem value='accessories'>Accessories</SelectItem>
-								</SelectContent>
-							</Select>
-						</div>
-						<div className='grid gap-3'>
-							<Label htmlFor='subcategory'>Subcategory (optional)</Label>
-							<Select>
-								<SelectTrigger id='subcategory' aria-label='Select subcategory'>
-									<SelectValue placeholder='Select subcategory' />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value='t-shirts'>T-Shirts</SelectItem>
-									<SelectItem value='hoodies'>Hoodies</SelectItem>
-									<SelectItem value='sweatshirts'>Sweatshirts</SelectItem>
-								</SelectContent>
-							</Select>
-						</div>
-					</div>
+					<CustomRadioGroup options={radioOptions} data={radioData} setData={setRadioData} />
 				</FormSection>
 			</FormLeftRows>
 			<FormRightRows>
@@ -175,16 +174,7 @@ function Dashboard() {
 					<div className='grid gap-6'>
 						<div className='grid gap-3'>
 							<Label>Status</Label>
-							<Select>
-								<SelectTrigger aria-label='Select status'>
-									<SelectValue placeholder='Select status' />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value='draft'>Draft</SelectItem>
-									<SelectItem value='published'>Active</SelectItem>
-									<SelectItem value='archived'>Archived</SelectItem>
-								</SelectContent>
-							</Select>
+							<CustomSelect data={selectData} setData={setSelectData} options={selectOptions} />
 						</div>
 					</div>
 				</FormSection>
