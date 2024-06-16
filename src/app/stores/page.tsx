@@ -1,3 +1,4 @@
+'use client';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
 import CustomTable from '@/components/sections/table/CustomTable';
 import React, { FC } from 'react';

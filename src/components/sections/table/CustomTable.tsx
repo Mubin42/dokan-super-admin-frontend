@@ -9,6 +9,11 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChevronLeftIcon, ChevronRightIcon, Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import SearchInput from '@/components/end-component/inputs/search-input/SearchInput';
+import { Button } from '@/components/ui/button';
+import Pagination from './Pagination';
 type CustomTableProps = {};
 
 const CustomTable: FC<CustomTableProps> = ({}) => {
@@ -30,10 +35,7 @@ const CustomTable: FC<CustomTableProps> = ({}) => {
 
 	return (
 		<Card>
-			<CardHeader className='px-7 '>
-				<CardTitle>Orders</CardTitle>
-				<CardDescription>Recent orders from your store.</CardDescription>
-			</CardHeader>
+			<Pagination/>
 			<CardContent>
 				<Table>
 					<TableHeader>

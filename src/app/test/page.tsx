@@ -21,7 +21,7 @@ const Test: FC<TestProps> = ({}) => {
 	// components
 
 	return (
-		<PageLayout>
+		<PageLayout currentPage='abc'>
 			<div className='bg-blue-300 h-full'>A</div>
 		</PageLayout>
 	);
