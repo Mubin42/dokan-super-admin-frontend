@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 
 import { ChevronLeft, Upload } from 'lucide-react';
@@ -31,8 +32,37 @@ import {
 	FormRightRows,
 	FormSection,
 } from '@/components/sections/forms/form-layout';
+import DatePicker from '@/components/sections/from-elements/DatePicker';
+import { useState } from 'react';
+import { DateRange } from 'react-day-picker';
+import moment from 'moment';
+import DatePickerWithRange from '@/components/sections/from-elements/DateRangePicker';
+
+// Date input -> Done
+// Date range input -> Done
+
+// Input -> Initialized
+// Select -> Initialized
+// Textarea -> Initialized
+
+// Checkbox
+// Email input
+// Radio buttons
+// Button
+// Colored inputs
+// File
+// Range input
+// Password input
+// Input type=image
+// Switch
 
 function Dashboard() {
+	const [date, setDate] = useState<Date | undefined>();
+
+	const [dateRange, setDateRange] = useState<DateRange | undefined>({
+		from: new Date(2022, 0, 20),
+		to: moment(new Date(2022, 0, 20)).add(20, 'days').toDate(),
+	});
 	const title = (
 		<div className='flex items-center gap-4'>
 			<Button variant='outline' size='icon' className='h-7 w-7'>
@@ -60,11 +90,42 @@ function Dashboard() {
 				>
 					<div className='grid gap-3'>
 						<Label htmlFor='name'>Name</Label>
-						<Input
-							id='name'
-							type='text'
-							className='w-full'
-							defaultValue='Gamer Gear Pro Controller'
+						<Input type='text' defaultValue='Gamer Gear Pro Controller' />
+					</div>
+					<div className='grid gap-3'>
+						<Label htmlFor='description'>Description</Label>
+						<Textarea
+							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
+							className='min-h-32'
+						/>
+					</div>
+
+					<div>
+						<Input type='datetime-local' />
+						<input type='email' />
+						<input type='file' />
+						<input type='hidden' />
+						<input type='image' />
+						<input type='month' />
+						<input type='number' />
+						<input type='password' />
+						<input type='radio' />
+						<input type='range' />
+						<input type='reset' />
+						<input type='search' />
+						<input type='submit' />
+						<input type='tel' />
+						<input type='text' />
+						<input type='time' />
+						<input type='url' />
+						<input type='week' />
+					</div>
+					<div className='grid gap-3'>
+						<Label htmlFor='description'>Description</Label>
+						<Textarea
+							id='description'
+							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
+							className='min-h-32'
 						/>
 					</div>
 					<div className='grid gap-3'>
@@ -76,6 +137,7 @@ function Dashboard() {
 						/>
 					</div>
 				</FormSection>
+
 				<FormSection title='Stock' description='Lipsum dolor sit amet, consectetur adipiscing elit'>
 					<Table>
 						<TableHeader>
@@ -188,12 +250,12 @@ function Dashboard() {
 				</FormSection>
 			</FormLeftRows>
 			<FormRightRows>
-				<FormSection title='Product Status'>
+				<FormSection title='Select Field Example'>
 					<div className='grid gap-6'>
 						<div className='grid gap-3'>
-							<Label htmlFor='status'>Status</Label>
+							<Label>Status</Label>
 							<Select>
-								<SelectTrigger id='status' aria-label='Select status'>
+								<SelectTrigger aria-label='Select status'>
 									<SelectValue placeholder='Select status' />
 								</SelectTrigger>
 								<SelectContent>
@@ -203,6 +265,20 @@ function Dashboard() {
 								</SelectContent>
 							</Select>
 						</div>
+					</div>
+				</FormSection>
+				<FormSection
+					title='Date Inputs Example'
+					description='Date picker and date range picker examples.'
+				>
+					<div className='grid gap-3'>
+						<Label>Date</Label>
+						<DatePicker date={date} setDate={setDate} />
+					</div>
+
+					<div className='grid gap-3'>
+						<Label>Date Range</Label>
+						<DatePickerWithRange date={dateRange} setDate={setDateRange} />
 					</div>
 				</FormSection>
 

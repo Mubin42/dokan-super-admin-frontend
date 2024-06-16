@@ -4,9 +4,10 @@ import React, { FC } from 'react';
 type FormParentRowProps = {
 	children: React.ReactNode;
 	className?: string;
+	singleColumn?: boolean;
 };
 
-const FormParentRow: FC<FormParentRowProps> = ({ children, className }) => {
+const FormParentRow: FC<FormParentRowProps> = ({ children, className, singleColumn }) => {
 	// api
 
 	// hooks
@@ -24,7 +25,16 @@ const FormParentRow: FC<FormParentRowProps> = ({ children, className }) => {
 	// components
 
 	return (
-		<div className={cn('grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8', className)}>
+		<div
+			className={cn(
+				'grid gap-4 md:grid-cols-[1fr_250px] lg:gap-8',
+				{
+					'lg:grid-cols-3': !singleColumn,
+					'lg:grid-cols-1': singleColumn,
+				},
+				className
+			)}
+		>
 			{children}
 		</div>
 	);
