@@ -10,24 +10,20 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import moment from 'moment';
 import { FC } from 'react';
 
-type DatePickerWithRangeProps = React.HTMLAttributes<HTMLDivElement> & {
+type CustomDateRangePickerProps = React.HTMLAttributes<HTMLDivElement> & {
 	className?: string;
 	date: DateRange | undefined;
 	setDate: (date: DateRange | undefined) => void;
 };
 
-const DatePickerWithRange: FC<DatePickerWithRangeProps> = ({ className, date, setDate }) => {
+const CustomDateRangePicker: FC<CustomDateRangePickerProps> = ({ className, date, setDate }) => {
 	return (
 		<div className={cn('grid gap-2', className)}>
 			<Popover>
 				<PopoverTrigger asChild>
 					<Button
-						id='date'
 						variant={'outline'}
-						className={cn(
-							'w-[300px] justify-start text-left font-normal',
-							!date && 'text-muted-foreground'
-						)}
+						className={cn(' justify-start text-left font-normal', !date && 'text-muted-foreground')}
 					>
 						<CalendarIcon className='mr-2 h-4 w-4' />
 						{date?.from ? (
@@ -59,4 +55,4 @@ const DatePickerWithRange: FC<DatePickerWithRangeProps> = ({ className, date, se
 	);
 };
 
-export default DatePickerWithRange;
+export default CustomDateRangePicker;

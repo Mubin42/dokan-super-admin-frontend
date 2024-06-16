@@ -32,20 +32,23 @@ import {
 	FormRightRows,
 	FormSection,
 } from '@/components/sections/forms/form-layout';
-import DatePicker from '@/components/sections/from-elements/DatePicker';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import moment from 'moment';
-import DatePickerWithRange from '@/components/sections/from-elements/DateRangePicker';
+import {
+	CustomDatePicker,
+	CustomDateRangePicker,
+	CustomCheckbox,
+} from '@/components/sections/from-elements';
 
 // Date input -> Done
 // Date range input -> Done
+// Checkbox -> Done
 
 // Input -> Initialized
 // Select -> Initialized
 // Textarea -> Initialized
 
-// Checkbox
 // Email input
 // Radio buttons
 // Button
@@ -58,11 +61,15 @@ import DatePickerWithRange from '@/components/sections/from-elements/DateRangePi
 
 function Dashboard() {
 	const [date, setDate] = useState<Date | undefined>();
+	const [checkboxData, setCheckboxData] = useState<string[]>();
 
 	const [dateRange, setDateRange] = useState<DateRange | undefined>({
 		from: new Date(2022, 0, 20),
 		to: moment(new Date(2022, 0, 20)).add(20, 'days').toDate(),
 	});
+
+	const checkboxOptions = ['food', 'drinks', 'electronics'];
+
 	const title = (
 		<div className='flex items-center gap-4'>
 			<Button variant='outline' size='icon' className='h-7 w-7'>
@@ -273,52 +280,20 @@ function Dashboard() {
 				>
 					<div className='grid gap-3'>
 						<Label>Date</Label>
-						<DatePicker date={date} setDate={setDate} />
+						<CustomDatePicker date={date} setDate={setDate} />
 					</div>
 
 					<div className='grid gap-3'>
 						<Label>Date Range</Label>
-						<DatePickerWithRange date={dateRange} setDate={setDateRange} />
+						<CustomDateRangePicker date={dateRange} setDate={setDateRange} />
 					</div>
 				</FormSection>
 
 				<FormSection
-					title='Product Image'
+					title='Checkbox Example'
 					description='Lipsum dolor sit amet, consectetur adipiscing elit'
 				>
-					<div className='grid gap-2'>
-						<Image
-							alt='Product image'
-							className='aspect-square w-full rounded-md object-cover'
-							height='300'
-							src='/placeholder.svg'
-							width='300'
-						/>
-						<div className='grid grid-cols-3 gap-2'>
-							<button>
-								<Image
-									alt='Product image'
-									className='aspect-square w-full rounded-md object-cover'
-									height='84'
-									src='/placeholder.svg'
-									width='84'
-								/>
-							</button>
-							<button>
-								<Image
-									alt='Product image'
-									className='aspect-square w-full rounded-md object-cover'
-									height='84'
-									src='/placeholder.svg'
-									width='84'
-								/>
-							</button>
-							<button className='flex aspect-square w-full items-center justify-center rounded-md border border-dashed'>
-								<Upload className='h-4 w-4 text-muted-foreground' />
-								<span className='sr-only'>Upload</span>
-							</button>
-						</div>
-					</div>
+					<CustomCheckbox data={checkboxData} setData={setCheckboxData} options={checkboxOptions} />
 				</FormSection>
 				<FormSection
 					title='Archive Product'

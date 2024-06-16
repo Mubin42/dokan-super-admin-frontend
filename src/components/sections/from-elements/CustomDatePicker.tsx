@@ -9,21 +9,18 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-type DatePickerProps = {
+type CustomDatePickerProps = {
 	date: Date | undefined;
 	setDate: (date: Date | undefined) => void;
 };
 
-const DatePicker: React.FC<DatePickerProps> = ({ date, setDate }) => {
+const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ date, setDate }) => {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
 				<Button
 					variant={'outline'}
-					className={cn(
-						'w-[280px] justify-start text-left font-normal',
-						!date && 'text-muted-foreground'
-					)}
+					className={cn('justify-start text-left font-normal', !date && 'text-muted-foreground')}
 				>
 					<CalendarIcon className='mr-2 h-4 w-4' />
 					{date ? moment(date).format('LL') : <span>Pick a date</span>}
@@ -36,4 +33,4 @@ const DatePicker: React.FC<DatePickerProps> = ({ date, setDate }) => {
 	);
 };
 
-export default DatePicker;
+export default CustomDatePicker;
