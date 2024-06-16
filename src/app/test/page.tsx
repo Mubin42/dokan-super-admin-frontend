@@ -40,6 +40,7 @@ import {
 	CustomDateRangePicker,
 	CustomCheckbox,
 } from '@/components/sections/from-elements';
+import { toast } from '@/components/ui/use-toast';
 
 // Date input -> Done
 // Date range input -> Done
@@ -68,6 +69,25 @@ function Dashboard() {
 		to: moment(new Date(2022, 0, 20)).add(20, 'days').toDate(),
 	});
 
+	const onSubmit = (
+		e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
+		e.preventDefault();
+		const data = {
+			date,
+			dateRange,
+			checkboxData,
+		};
+		toast({
+			title: 'You submitted the following values:',
+			description: (
+				<pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+					<code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+				</pre>
+			),
+		});
+	};
+
 	const checkboxOptions = ['food', 'drinks', 'electronics'];
 
 	const title = (
@@ -83,7 +103,9 @@ function Dashboard() {
 				<Button variant='outline' size='sm'>
 					Discard
 				</Button>
-				<Button size='sm'>Save Product</Button>
+				<Button size='sm' type='submit'>
+					Save Product
+				</Button>
 			</div>
 		</div>
 	);
@@ -102,43 +124,6 @@ function Dashboard() {
 					<div className='grid gap-3'>
 						<Label htmlFor='description'>Description</Label>
 						<Textarea
-							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
-							className='min-h-32'
-						/>
-					</div>
-
-					<div>
-						<Input type='datetime-local' />
-						<input type='email' />
-						<input type='file' />
-						<input type='hidden' />
-						<input type='image' />
-						<input type='month' />
-						<input type='number' />
-						<input type='password' />
-						<input type='radio' />
-						<input type='range' />
-						<input type='reset' />
-						<input type='search' />
-						<input type='submit' />
-						<input type='tel' />
-						<input type='text' />
-						<input type='time' />
-						<input type='url' />
-						<input type='week' />
-					</div>
-					<div className='grid gap-3'>
-						<Label htmlFor='description'>Description</Label>
-						<Textarea
-							id='description'
-							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
-							className='min-h-32'
-						/>
-					</div>
-					<div className='grid gap-3'>
-						<Label htmlFor='description'>Description</Label>
-						<Textarea
-							id='description'
 							defaultValue='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.'
 							className='min-h-32'
 						/>
@@ -313,23 +298,23 @@ function Dashboard() {
 			<Button variant='outline' size='sm'>
 				Discard
 			</Button>
-			<Button size='sm'>Save Product</Button>
+			<Button type='submit' size='sm'>
+				Save Product
+			</Button>
 		</div>
 	);
 
 	return (
 		<PageLayout currentPage='Order'>
-			<div className='flex min-h-screen w-full flex-col'>
-				<div className='flex flex-col sm:gap-4 sm:py-4 sm:pl-14 '>
-					<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8'>
-						<div className='mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4'>
-							{title}
-							{formRows}
-							{footer}
-						</div>
-					</main>
-				</div>
-			</div>
+			<form onSubmit={onSubmit}>
+				<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 '>
+					<div className='mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4'>
+						{title}
+						{formRows}
+						{footer}
+					</div>
+				</main>
+			</form>
 		</PageLayout>
 	);
 }

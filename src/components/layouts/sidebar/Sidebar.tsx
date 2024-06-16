@@ -29,7 +29,7 @@ const Sidebar: FC<SidebarProps> = ({ className, currentPage, ...props }) => {
 
 	return (
 		<aside
-			className={cn('hidden w-64 px-4 h-full flex-col border-r bg-background md:flex', className)}
+			className={cn('hidden w-64 px-4 h-screen flex-col border-r bg-background md:flex', className)}
 		>
 			<nav className='flex flex-col gap-4 px-2 sm:py-4'>
 				<h1 className='font-bold text-xl'>{currentPage}</h1>
