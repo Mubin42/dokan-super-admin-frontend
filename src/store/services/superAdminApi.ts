@@ -9,8 +9,16 @@ const superAdminApi = mainApi.injectEndpoints({
 			}),
 			providesTags: ['super-admin'],
 		}),
+		createSuperAdmin: builder.mutation({
+			query: (body) => ({
+				url: 'admin-portal/super-admins',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['super-admin'],
+		}),
 	}),
 });
 
-export const { useGetAllSuperAdminsQuery } = superAdminApi;
+export const { useGetAllSuperAdminsQuery, useCreateSuperAdminMutation } = superAdminApi;
 export default superAdminApi;

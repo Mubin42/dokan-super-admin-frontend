@@ -1,7 +1,7 @@
 'use client';
 import { AddButton } from '@/components/end-component/buttons';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
-import { CustomTable } from '@/components/sections/table';
+import { CustomTable, TableTitle } from '@/components/sections/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,6 +18,7 @@ import { useGetAllSuperAdminsQuery } from '@/store/services/superAdminApi';
 import { refresh, updateTable } from '@/store/slices/tableSlice';
 import { File, ListFilter, PlusCircle } from 'lucide-react';
 import moment from 'moment';
+import Link from 'next/link';
 import React, { FC, useEffect } from 'react';
 
 type SuperAdminsPageProps = {};
@@ -55,11 +56,25 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 	// components
 	const head = (
 		<>
-			<TableHead>Name</TableHead>
-			<TableHead className='hidden sm:table-cell'>Email</TableHead>
-			<TableHead className='hidden sm:table-cell'>Role</TableHead>
-			<TableHead className='hidden md:table-cell'>IsActive</TableHead>
-			<TableHead className='text-right'>Created At</TableHead>
+			<TableTitle val='name' onClick={() => handleSort('name')}>
+				Name
+			</TableTitle>
+			<TableTitle val='email' className='hidden sm:table-cell' onClick={() => handleSort('email')}>
+				Email
+			</TableTitle>
+			<TableTitle val='role' onClick={() => handleSort('role')} className='hidden sm:table-cell'>
+				Role
+			</TableTitle>
+			<TableTitle
+				val='isActive'
+				onClick={() => handleSort('isActive')}
+				className='hidden md:table-cell'
+			>
+				IsActive
+			</TableTitle>
+			<TableTitle val='createdAt' onClick={() => handleSort('createdAt')}>
+				Created At
+			</TableTitle>
 		</>
 	);
 
@@ -79,8 +94,8 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 					</Badge>
 				}
 			</TableCell>
-			<TableCell className='hidden text-right md:table-cell'>
-				{item?.createdAt && moment(item?.createdAt).format('DD-MM-YYYY hh:mm A')}
+			<TableCell className='hidden md:table-cell'>
+				{item?.createdAt && moment(item?.createdAt).calendar()}
 			</TableCell>
 		</TableRow>
 	));
@@ -106,7 +121,9 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 				<File className='h-3.5 w-3.5' />
 				<span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>Export</span>
 			</Button>
-			<AddButton title='Add Super Admin' icon={<PlusCircle className='h-3.5 w-3.5' />} />
+			<Link href='/add/super-admin'>
+				<AddButton title='Add Super Admin' icon={<PlusCircle className='h-3.5 w-3.5' />} />
+			</Link>
 		</div>
 	);
 

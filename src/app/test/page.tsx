@@ -3,13 +3,6 @@ import { ChevronLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
 
 import { Textarea } from '@/components/ui/textarea';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
@@ -20,7 +13,7 @@ import {
 	FormSection,
 } from '@/components/sections/forms/form-layout';
 
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import moment from 'moment';
 import {
@@ -34,24 +27,10 @@ import {
 import { toast } from '@/components/ui/use-toast';
 import { Switch } from '@/components/ui/switch';
 
-// Date input -> Done
-// Date range input -> Done
-// Checkbox -> Done
-
-// Input -> Initialized
-// Select -> Initialized
-// Textarea -> Initialized
-// Switch -> Initialized
-
-// Email input -> Initialized
-// Radio buttons
-
-// File
-// Range input
-// Password input
-// Input type=image
+import CreatePageLayout from '@/components/layouts/page-layout/CreatePageLayout';
 
 function Dashboard() {
+	//states
 	const [name, setName] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 	const [switchData, setSwitchData] = useState<boolean>(false);
@@ -71,6 +50,13 @@ function Dashboard() {
 		to: moment(new Date()).add(20, 'days').toDate(),
 	});
 
+	// variables
+	const checkboxOptions = ['food', 'drinks', 'electronics'];
+	const radioOptions = ['male', 'female', 'other'];
+
+	const selectOptions = ['draft', 'published', 'archived'];
+
+	// functions
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const data = {
@@ -96,32 +82,8 @@ function Dashboard() {
 		});
 	};
 
-	const checkboxOptions = ['food', 'drinks', 'electronics'];
-	const radioOptions = ['male', 'female', 'other'];
-
-	const selectOptions = ['draft', 'published', 'archived'];
-
-	const title = (
-		<div className='flex items-center gap-4'>
-			<Button variant='outline' size='icon' className='h-7 w-7' type='button'>
-				<ChevronLeft className='h-4 w-4' />
-				<span className='sr-only'>Back</span>
-			</Button>
-			<h1 className='flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0'>
-				Pro Controller
-			</h1>
-			<div className='hidden items-center gap-2 md:ml-auto md:flex'>
-				<Button variant='outline' size='sm' type='button'>
-					Discard
-				</Button>
-				<Button size='sm' type='submit'>
-					Save Product
-				</Button>
-			</div>
-		</div>
-	);
-
-	const formRows = (
+	// components
+	const form = (
 		<FormParentRow>
 			<FormLeftRows>
 				<FormSection
@@ -212,29 +174,10 @@ function Dashboard() {
 		</FormParentRow>
 	);
 
-	const footer = (
-		<div className='flex items-center justify-center gap-2 md:hidden'>
-			<Button variant='outline' size='sm'>
-				Discard
-			</Button>
-			<Button type='submit' size='sm'>
-				Save Product
-			</Button>
-		</div>
-	);
-
 	return (
-		<PageLayout currentPage='Order'>
-			<form onSubmit={onSubmit}>
-				<main className='grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8'>
-					<div className='mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4'>
-						{title}
-						{formRows}
-						{footer}
-					</div>
-				</main>
-			</form>
-		</PageLayout>
+		<CreatePageLayout title='Create Product' onSubmit={onSubmit} submitText='Save Product'>
+			{form}
+		</CreatePageLayout>
 	);
 }
 
