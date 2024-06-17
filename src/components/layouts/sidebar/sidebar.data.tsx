@@ -26,6 +26,11 @@ export const sidebarData: SidebarDataType[] = [
 		label: 'Stores',
 	},
 	{
+		link: '/super-admins',
+		icon: <Users2 className='h-5 w-5' />,
+		label: 'Super Admins',
+	},
+	{
 		link: '#',
 		icon: <Package2 className='h-5 w-5' />,
 		label: 'Acme Inc',

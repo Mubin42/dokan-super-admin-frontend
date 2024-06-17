@@ -22,11 +22,7 @@ const Stores: FC<StoresProps> = ({}) => {
 
 	// components
 
-	return (
-		<PageLayout currentPage='Stores'>
-			<CustomTable />
-		</PageLayout>
-	);
+	return <PageLayout currentPage='Stores'>A{/* <CustomTable /> */}</PageLayout>;
 };
 
 export default Stores;
