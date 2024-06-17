@@ -1,6 +1,6 @@
+import ProfileAvatar from '@/components/end-component/icons/profile-avatar/ProfileAvatar';
 import AccountDropdown from '@/components/sections/account-dropdown/AccountDropdown';
 import { ModeToggle } from '@/components/sections/mode-toggle/ModeToggle';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 import React, { FC } from 'react';
@@ -26,10 +26,7 @@ const Header: FC<HeaderProps> = ({}) => {
 
 	const user = (
 		<AccountDropdown>
-			<Avatar className='cursor-pointer'>
-				<AvatarImage src='https://github.com/shadcn.png' />
-				<AvatarFallback>CN</AvatarFallback>
-			</Avatar>
+			<ProfileAvatar />
 		</AccountDropdown>
 	);
 
