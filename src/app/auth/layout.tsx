@@ -1,17 +1,33 @@
+'use client';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
 import { IMAGE_URL } from '@/lib/constants';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { FC } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { FC, useEffect } from 'react';
 
 type AuthPageLayoutProps = {
 	children: React.ReactNode;
+};
+
+type AuthStateProps = {
+	isLoggedIn: boolean | undefined;
+	loading: boolean;
 };
 
 const AuthPageLayout: FC<AuthPageLayoutProps> = ({ children }) => {
 	// api
 
 	// hooks
+	const router = useRouter();
+	const { isLoggedIn, loading }: AuthStateProps = useAuth();
+
+	useEffect(() => {
+		if (isLoggedIn) router?.replace('/');
+	}, [isLoggedIn, router]);
+
+	if (loading) return null;
 
 	// states
 
@@ -42,13 +58,16 @@ const AuthPageLayout: FC<AuthPageLayoutProps> = ({ children }) => {
 			/>
 		</div>
 	);
+	if (!isLoggedIn) {
+		return (
+			<div className='w-screen h-screen bg-muted/40 lg:grid lg:grid-cols-2 '>
+				{left}
+				<div className='flex items-center justify-center py-12'>{children}</div>
+			</div>
+		);
+	}
 
-	return (
-		<div className='w-screen h-screen bg-muted/40 lg:grid lg:grid-cols-2 '>
-			{left}
-			<div className='flex items-center justify-center py-12'>{children}</div>
-		</div>
-	);
+	return null;
 };
 
 export default AuthPageLayout;

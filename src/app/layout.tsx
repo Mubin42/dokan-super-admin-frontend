@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/layouts/providers/theme-provider/ThemeProvider';
+
 import { Toaster } from '@/components/ui/toaster';
+import Provider from '@/components/layouts/providers/provider/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,14 +26,8 @@ export default function RootLayout({
 					overflowY: 'hidden',
 				}}
 			>
-				<ThemeProvider
-					attribute='class'
-					defaultTheme='system'
-					enableSystem
-					disableTransitionOnChange
-				>
-					{children}
-				</ThemeProvider>
+				<Provider>{children}</Provider>
+
 				<Toaster />
 			</body>
 		</html>
