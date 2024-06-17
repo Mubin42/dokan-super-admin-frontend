@@ -1,4 +1,4 @@
-import SearchInput from '@/components/end-component/inputs/search-input/SearchInput';
+import { SearchInput } from '@/components/end-component/inputs';
 import { Button } from '@/components/ui/button';
 import {
 	Select,
@@ -15,7 +15,6 @@ import {
 	ChevronRightIcon,
 	ChevronsLeft,
 	ChevronsRight,
-	PlusIcon,
 	RotateCcw,
 } from 'lucide-react';
 import React, { FC, useState } from 'react';
@@ -29,7 +28,7 @@ const Pagination: FC<PaginationProps> = ({ data }) => {
 
 	// hooks
 	const dispatch = useAppDispatch();
-	const { page, search, limit } = useAppSelector((state) => state.table);
+	const { page, limit } = useAppSelector((state) => state.table);
 
 	// resets the table
 

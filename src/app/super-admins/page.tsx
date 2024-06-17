@@ -1,4 +1,5 @@
 'use client';
+import { AddButton } from '@/components/end-component/buttons';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
 import { CustomTable } from '@/components/sections/table';
 import { Badge } from '@/components/ui/badge';
@@ -105,10 +106,7 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 				<File className='h-3.5 w-3.5' />
 				<span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>Export</span>
 			</Button>
-			<Button size='sm' className='h-7 gap-1'>
-				<PlusCircle className='h-3.5 w-3.5' />
-				<span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>Add Product</span>
-			</Button>
+			<AddButton title='Add Super Admin' icon={<PlusCircle className='h-3.5 w-3.5' />} />
 		</div>
 	);
 
