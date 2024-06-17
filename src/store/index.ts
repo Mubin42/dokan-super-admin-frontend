@@ -10,7 +10,7 @@ export const store = configureStore({
 		table: tableSlice,
 		[mainApi.reducerPath]: mainApi.reducer,
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mainApi.middleware).concat(),
 
 	devTools: true,
 });

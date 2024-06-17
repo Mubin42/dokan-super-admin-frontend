@@ -34,7 +34,7 @@ const Pagination: FC<PaginationProps> = ({}) => {
 
 	// components
 	const left = (
-		<div className='flex gap-2 items-center'>
+		<div className='flex gap-2 items-center flex-1'>
 			<Button variant='outline' size='icon'>
 				<RotateCcw className='h-4 w-4' />
 			</Button>
@@ -62,7 +62,7 @@ const Pagination: FC<PaginationProps> = ({}) => {
 	);
 
 	const right = (
-		<div className='flex gap-2 items-center'>
+		<div className='flex flex-1 gap-2 items-center  justify-end'>
 			{select}
 			<Button variant='outline' size='icon'>
 				<ChevronLeftIcon className='h-4 w-4' />

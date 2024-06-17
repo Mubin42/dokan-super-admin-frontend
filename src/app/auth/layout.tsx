@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks';
 import { IMAGE_URL } from '@/lib/constants';
 import Image from 'next/image';
 import Link from 'next/link';

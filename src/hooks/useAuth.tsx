@@ -1,5 +1,5 @@
-import { TOKEN_NAME } from "@/lib/constants";
-import { useEffect, useState } from "react";
+import { TOKEN_NAME } from '@/lib/constants';
+import { useEffect, useState } from 'react';
 
 type UseAuthReturn = {
 	loading: boolean;
@@ -7,7 +7,7 @@ type UseAuthReturn = {
 	token: string;
 };
 
-export const useAuth = (): UseAuthReturn => {
+const useAuth = (): UseAuthReturn => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(undefined);
 	const [authToken, setAuthToken] = useState<string>('');
@@ -28,3 +28,5 @@ export const useAuth = (): UseAuthReturn => {
 
 	return { loading, isLoggedIn, token: authToken };
 };
+
+export default useAuth;

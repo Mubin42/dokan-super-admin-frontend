@@ -3,15 +3,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAppDispatch } from '@/hooks';
+import useCustomToast from '@/hooks/useCustomToast';
+import { useLoginMutation } from '@/store/services/authApi';
+import { login } from '@/store/slices/authSlice';
 import Link from 'next/link';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 type LoginProps = {};
 
 const Login: FC<LoginProps> = ({}) => {
 	// api
+	const [trigger, result] = useLoginMutation();
 
 	// hooks
+	useCustomToast(result, 'Login SuccessFull');
+	const dispatch = useAppDispatch();
 
 	// states
 	const [password, setPassword] = React.useState('');
@@ -24,13 +31,15 @@ const Login: FC<LoginProps> = ({}) => {
 	// functions
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log({
-			email,
-			password,
-		});
+		trigger({ email, password });
 	};
 
 	// effects
+	useEffect(() => {
+		if (result?.isSuccess) {
+			dispatch(login(result?.data?.accessToken));
+		}
+	}, [result?.isSuccess]);
 
 	// components
 
@@ -55,9 +64,8 @@ const Login: FC<LoginProps> = ({}) => {
 				<CardContent>
 					<div className='grid gap-4'>
 						<div className='grid gap-2'>
-							<Label htmlFor='email'>Email</Label>
+							<Label>Email</Label>
 							<Input
-								id='email'
 								type='email'
 								placeholder='m@example.com'
 								required
@@ -67,14 +75,13 @@ const Login: FC<LoginProps> = ({}) => {
 						</div>
 						<div className='grid gap-2'>
 							<div className='flex items-center'>
-								<Label htmlFor='password'>Password</Label>
+								<Label>Password</Label>
 								{/* Forget password is not available for now */}
 								{/* <Link href='/forgot-password' className='ml-auto inline-block text-sm underline'>
 								Forgot your password?
 							</Link> */}
 							</div>
 							<Input
-								id='password'
 								type='password'
 								placeholder='********'
 								required

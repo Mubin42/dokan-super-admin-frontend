@@ -1,14 +1,16 @@
-import ProfileAvatar from '@/components/end-component/icons/profile-avatar/ProfileAvatar';
 import AccountDropdown from '@/components/sections/account-dropdown/AccountDropdown';
 import { ModeToggle } from '@/components/sections/mode-toggle/ModeToggle';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { useGetSelfQuery } from '@/store/services/authApi';
+import { CircleUser, Search } from 'lucide-react';
 import React, { FC } from 'react';
 
 type HeaderProps = {};
 
 const Header: FC<HeaderProps> = ({}) => {
 	// api
+	const { data, isLoading, isSuccess } = useGetSelfQuery({});
 
 	// hooks
 
@@ -25,8 +27,12 @@ const Header: FC<HeaderProps> = ({}) => {
 	// components
 
 	const user = (
-		<AccountDropdown>
-			<ProfileAvatar />
+		<AccountDropdown data={data?.doc}>
+			<Button variant='outline' size='icon'>
+				<CircleUser />
+			</Button>
+			{/* This component does not work */}
+			{/* <ProfileAvatar /> */}
 		</AccountDropdown>
 	);
 
@@ -42,7 +48,7 @@ const Header: FC<HeaderProps> = ({}) => {
 				/>
 			</div>
 			<ModeToggle />
-			{user}
+			{isSuccess && user}
 		</header>
 	);
 };

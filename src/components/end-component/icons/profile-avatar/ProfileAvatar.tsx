@@ -3,7 +3,11 @@ import { IMAGE_URL } from '@/lib/constants';
 import React, { FC } from 'react';
 
 type ProfileAvatarProps = {};
-
+/**
+ * This is a profile avatar component
+ * @status Does not work
+ * @returns
+ */
 const ProfileAvatar: FC<ProfileAvatarProps> = ({}) => {
 	// api
 

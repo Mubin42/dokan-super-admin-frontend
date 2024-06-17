@@ -3,8 +3,8 @@ import { cn } from '@/lib/utils';
 import React, { FC, useEffect } from 'react';
 import Sidebar from '../sidebar/Sidebar';
 import Header from '../header/Header';
-import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks';
 
 type PageLayoutProps = {
 	className?: string;

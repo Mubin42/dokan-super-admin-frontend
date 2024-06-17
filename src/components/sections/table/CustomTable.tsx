@@ -11,17 +11,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Pagination from './Pagination';
 import TableTopRow from './TableTopRow';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-	DropdownMenu,
-	DropdownMenuCheckboxItem,
-	DropdownMenuContent,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { File, ListFilter, PlusCircle } from 'lucide-react';
 type CustomTableProps = {};
 
 const CustomTable: FC<CustomTableProps> = ({}) => {

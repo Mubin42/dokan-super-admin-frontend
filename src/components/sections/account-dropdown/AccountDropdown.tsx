@@ -7,16 +7,20 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useAppDispatch } from '@/hooks';
+import { logout } from '@/store/slices/authSlice';
 import React, { FC } from 'react';
 
 type AccountDropdownProps = {
 	children: React.ReactNode;
+	data?: any;
 };
 
-const AccountDropdown: FC<AccountDropdownProps> = ({ children }) => {
+const AccountDropdown: FC<AccountDropdownProps> = ({ data, children }) => {
 	// api
 
 	// hooks
+	const dispatch = useAppDispatch();
 
 	// states
 
@@ -25,6 +29,9 @@ const AccountDropdown: FC<AccountDropdownProps> = ({ children }) => {
 	// styles
 
 	// functions
+	const handleLogout = () => {
+		dispatch(logout());
+	};
 
 	// effects
 
@@ -36,15 +43,15 @@ const AccountDropdown: FC<AccountDropdownProps> = ({ children }) => {
 			<DropdownMenuContent align='end'>
 				<DropdownMenuLabel>
 					<div className='flex flex-col'>
-						<h1 className='text-sm font-semibold'>Kazi Ehsanul Mubin</h1>
-						<Badge className='w-fit'>Admin</Badge>
+						<h1 className='text-sm font-semibold'>{data?.name}</h1>
+						<Badge className='w-fit'>{data?.role}</Badge>
 					</div>
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem>Settings</DropdownMenuItem>
 				<DropdownMenuItem>Support</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Logout</DropdownMenuItem>
+				<DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

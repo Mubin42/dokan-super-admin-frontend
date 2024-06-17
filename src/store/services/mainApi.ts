@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type TagType = string;
+type TagType = 'auth';
 
-const tags: TagType[] = [];
+const tags: TagType[] = ['auth'];
 
 export const mainApi = createApi({
 	reducerPath: 'mainApi',
