@@ -1,5 +1,7 @@
 'use client';
+import DeleteSuperAdminAlert from '@/components/end-component/alert-dialogs/DeleteSuperAdminAlert';
 import { AddButton } from '@/components/end-component/buttons';
+import ThreeDotsButton from '@/components/end-component/buttons/ThreeDotsButton';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
 import { CustomTable, TableTitle } from '@/components/sections/table';
 import { Badge } from '@/components/ui/badge';
@@ -8,11 +10,12 @@ import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
+	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { TableCell, TableHead, TableRow } from '@/components/ui/table';
+import { TableCell, TableRow } from '@/components/ui/table';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { useGetAllSuperAdminsQuery } from '@/store/services/superAdminApi';
 import { refresh, updateTable } from '@/store/slices/tableSlice';
@@ -27,7 +30,7 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 	// api
 	const { page, limit, search, sort } = useAppSelector((state) => state.table);
 
-	const { data, isLoading, isError } = useGetAllSuperAdminsQuery({
+	const { data, isLoading } = useGetAllSuperAdminsQuery({
 		sort,
 		page,
 		limit,
@@ -62,6 +65,9 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 			<TableTitle val='email' className='hidden sm:table-cell' onClick={() => handleSort('email')}>
 				Email
 			</TableTitle>
+			<TableTitle val='phone' onClick={() => handleSort('phone')}>
+				Phone
+			</TableTitle>
 			<TableTitle val='role' onClick={() => handleSort('role')} className='hidden sm:table-cell'>
 				Role
 			</TableTitle>
@@ -75,6 +81,7 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 			<TableTitle val='createdAt' onClick={() => handleSort('createdAt')}>
 				Created At
 			</TableTitle>
+			<TableCell>Actions</TableCell>
 		</>
 	);
 
@@ -84,6 +91,7 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 				<div className='font-medium'>{item?.name}</div>
 			</TableCell>
 			<TableCell className='hidden sm:table-cell'>{item?.email}</TableCell>
+			<TableCell>{item?.phone || 'Not Available'}</TableCell>
 			<TableCell className='hidden sm:table-cell'>
 				<Badge variant='outline'>{item?.role}</Badge>
 			</TableCell>
@@ -96,6 +104,22 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 			</TableCell>
 			<TableCell className='hidden md:table-cell'>
 				{item?.createdAt && moment(item?.createdAt).calendar()}
+			</TableCell>
+			<TableCell>
+				<DropdownMenu>
+					<DropdownMenuTrigger>
+						<ThreeDotsButton />
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align='end'>
+						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuItem>View Details</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<Link href={`/update/super-admin/${item?._id}`}>
+							<DropdownMenuItem>Update</DropdownMenuItem>
+						</Link>
+						<DeleteSuperAdminAlert data={item} />
+					</DropdownMenuContent>
+				</DropdownMenu>
 			</TableCell>
 		</TableRow>
 	));

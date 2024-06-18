@@ -5,28 +5,31 @@ import { CustomSelect } from '@/components/sections/forms/from-elements';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { toast } from '@/components/ui/use-toast';
 import { useCustomToast } from '@/hooks';
-import { useCreateSuperAdminMutation } from '@/store/services/superAdminApi';
-import { useRouter } from 'next/navigation';
+import {
+	useGetSuperAdminByIdQuery,
+	useUpdateSuperAdminMutation,
+} from '@/store/services/superAdminApi';
+import { useParams, useRouter } from 'next/navigation';
 import React, { FC, useEffect, useState } from 'react';
 
-type AddSuperAdminProps = {};
+type UpdateSuperAdminProps = {};
 
-const AddSuperAdmin: FC<AddSuperAdminProps> = ({}) => {
+const UpdateSuperAdmin: FC<UpdateSuperAdminProps> = ({}) => {
 	// api
-	const [trigger, response] = useCreateSuperAdminMutation();
+	const { id } = useParams();
+	const { data, isLoading, isSuccess } = useGetSuperAdminByIdQuery(id, { skip: !id });
+	const [trigger, response] = useUpdateSuperAdminMutation();
 
 	// hooks
 	const router = useRouter();
-	useCustomToast(response, 'Super Admin added successfully');
+	useCustomToast(response, 'Super Admin updated successfully');
 
 	// states
 	const [name, setName] = useState<string>();
 	const [email, setEmail] = useState<string>();
 	const [phone, setPhone] = useState<string>();
-	const [password, setPassword] = useState<string>();
-	const [confirmPassword, setConfirmPassword] = useState<string>();
+
 	const [role, setRole] = useState<string>();
 	const [isActive, setIsActive] = useState<boolean>(true);
 
@@ -38,19 +41,26 @@ const AddSuperAdmin: FC<AddSuperAdminProps> = ({}) => {
 	// functions
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (password !== confirmPassword) {
-			toast({
-				variant: 'destructive',
-				description: 'Passwords do not match',
-				duration: 2000,
-			});
-			return;
-		}
-
-		trigger({ name, email, password, role, isActive, phone });
+		const body = {
+			name,
+			phone,
+			role,
+			isActive,
+		};
+		trigger({ id, body });
 	};
 
 	// effects
+	useEffect(() => {
+		if (isSuccess) {
+			setName(data?.name);
+			setEmail(data?.email);
+			setPhone(data?.phone);
+			setRole(data?.role);
+			setIsActive(data?.isActive);
+		}
+	}, [data]);
+
 	useEffect(() => {
 		if (response.isSuccess) {
 			router.push('/super-admins');
@@ -70,27 +80,14 @@ const AddSuperAdmin: FC<AddSuperAdminProps> = ({}) => {
 				</div>
 				<div className='grid gap-3'>
 					<Label>Email *</Label>
-					<Input value={email} onChange={(e) => setEmail(e.target.value)} />
+					<Input value={email} disabled />
 				</div>
-
 				<div className='grid gap-3'>
 					<Label>Phone</Label>
 					<Input value={phone} onChange={(e) => setPhone(e.target.value)} />
 				</div>
 			</FormSection>
 			<FormSection title='Access Control' description='Select the permissions for this user.'>
-				<div className='grid gap-3'>
-					<Label>Password *</Label>
-					<Input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-				</div>
-				<div className='grid gap-3'>
-					<Label>Confirm Password *</Label>
-					<Input
-						type='password'
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-					/>
-				</div>
 				<div className='grid gap-3'>
 					<Label>Role</Label>
 					<CustomSelect data={role} setData={setRole} options={roleOptions} />
@@ -110,4 +107,4 @@ const AddSuperAdmin: FC<AddSuperAdminProps> = ({}) => {
 	);
 };
 
-export default AddSuperAdmin;
+export default UpdateSuperAdmin;

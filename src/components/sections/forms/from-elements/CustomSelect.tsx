@@ -33,7 +33,7 @@ const CustomSelect: FC<CustomSelectProps> = ({ data, setData, options }) => {
 	return (
 		<Select>
 			<SelectTrigger aria-label='Select status'>
-				<SelectValue placeholder='Select status' />
+				<SelectValue placeholder={data || 'Select status'} />
 			</SelectTrigger>
 			<SelectContent>
 				{options.map((item) => (

@@ -17,8 +17,38 @@ const superAdminApi = mainApi.injectEndpoints({
 			}),
 			invalidatesTags: ['super-admin'],
 		}),
+		getSuperAdminById: builder.query({
+			query: (id) => ({
+				url: `admin-portal/super-admins/${id}`,
+				method: 'GET',
+			}),
+			providesTags: ['super-admin'],
+		}),
+
+		updateSuperAdmin: builder.mutation({
+			query: ({ id, body }) => ({
+				url: `admin-portal/super-admins/${id}`,
+				method: 'PUT',
+				body,
+			}),
+			invalidatesTags: ['super-admin'],
+		}),
+
+		deleteSuperAdmin: builder.mutation({
+			query: (id) => ({
+				url: `admin-portal/super-admins/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['super-admin'],
+		}),
 	}),
 });
 
-export const { useGetAllSuperAdminsQuery, useCreateSuperAdminMutation } = superAdminApi;
+export const {
+	useGetAllSuperAdminsQuery,
+	useCreateSuperAdminMutation,
+	useGetSuperAdminByIdQuery,
+	useUpdateSuperAdminMutation,
+	useDeleteSuperAdminMutation,
+} = superAdminApi;
 export default superAdminApi;

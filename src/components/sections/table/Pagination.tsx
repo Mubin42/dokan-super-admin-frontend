@@ -1,4 +1,5 @@
 import { SearchInput } from '@/components/end-component/inputs';
+import CustomTooltip from '@/components/end-component/tooltips/CustomTooltip';
 import { Button } from '@/components/ui/button';
 import {
 	Select,
@@ -107,21 +108,34 @@ const Pagination: FC<PaginationProps> = ({ data }) => {
 	const right = (
 		<div className='flex flex-1 gap-2 items-center  justify-end'>
 			{select}
-			<Button variant='outline' size='icon' onClick={toStart}>
-				<ChevronsLeft className='h-4 w-4' />
-			</Button>
-			<Button variant='outline' size='icon' onClick={back}>
-				<ChevronLeftIcon className='h-4 w-4' />
-			</Button>
+
+			<CustomTooltip label='First Page'>
+				<Button variant='outline' size='icon' onClick={toStart}>
+					<ChevronsLeft className='h-4 w-4' />
+				</Button>
+			</CustomTooltip>
+
+			<CustomTooltip label='Previous Page'>
+				<Button variant='outline' size='icon' onClick={back}>
+					<ChevronLeftIcon className='h-4 w-4' />
+				</Button>
+			</CustomTooltip>
+
 			<h1 className='font-medium text-sm'>
 				Page {page} of {data?.totalPages && data.totalPages}
 			</h1>
-			<Button variant='outline' size='icon' onClick={next}>
-				<ChevronRightIcon className='h-4 w-4' />
-			</Button>
-			<Button variant='outline' size='icon' onClick={toLast}>
-				<ChevronsRight className='h-4 w-4' />
-			</Button>
+
+			<CustomTooltip label='Next Page'>
+				<Button variant='outline' size='icon' onClick={next}>
+					<ChevronRightIcon className='h-4 w-4' />
+				</Button>
+			</CustomTooltip>
+
+			<CustomTooltip label='Last Page'>
+				<Button variant='outline' size='icon' onClick={toLast}>
+					<ChevronsRight className='h-4 w-4' />
+				</Button>
+			</CustomTooltip>
 		</div>
 	);
 
