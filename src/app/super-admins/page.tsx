@@ -4,6 +4,7 @@ import { AddButton } from '@/components/end-component/buttons';
 import ThreeDotsButton from '@/components/end-component/buttons/ThreeDotsButton';
 import PageLayout from '@/components/layouts/page-layout/PageLayout';
 import { CustomTable, TableTitle } from '@/components/sections/table';
+import { AlertDialog, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -106,20 +107,27 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 				{item?.createdAt && moment(item?.createdAt).calendar()}
 			</TableCell>
 			<TableCell>
-				<DropdownMenu>
-					<DropdownMenuTrigger>
-						<ThreeDotsButton />
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align='end'>
-						<DropdownMenuLabel>Actions</DropdownMenuLabel>
-						<DropdownMenuItem>View Details</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<Link href={`/update/super-admin/${item?._id}`}>
-							<DropdownMenuItem>Update</DropdownMenuItem>
-						</Link>
-						<DeleteSuperAdminAlert data={item} />
-					</DropdownMenuContent>
-				</DropdownMenu>
+				<AlertDialog>
+					<DropdownMenu>
+						<DropdownMenuTrigger>
+							<ThreeDotsButton />
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align='end'>
+							<DropdownMenuLabel>Actions</DropdownMenuLabel>
+							<Link href={`/super-admins/${item?._id}`}>
+								<DropdownMenuItem>View Details</DropdownMenuItem>
+							</Link>
+							<DropdownMenuSeparator />
+							<Link href={`/update/super-admin/${item?._id}`}>
+								<DropdownMenuItem>Update</DropdownMenuItem>
+							</Link>
+							<AlertDialogTrigger className='w-full'>
+								<DropdownMenuItem>Delete</DropdownMenuItem>
+							</AlertDialogTrigger>
+						</DropdownMenuContent>
+					</DropdownMenu>
+					<DeleteSuperAdminAlert data={item} />
+				</AlertDialog>
 			</TableCell>
 		</TableRow>
 	));

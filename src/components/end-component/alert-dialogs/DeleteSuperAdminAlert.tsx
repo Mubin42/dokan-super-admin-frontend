@@ -1,5 +1,4 @@
 import {
-	AlertDialog,
 	AlertDialogAction,
 	AlertDialogCancel,
 	AlertDialogContent,
@@ -7,13 +6,12 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+
 import { useCustomToast } from '@/hooks';
 import { useDeleteSuperAdminMutation } from '@/store/services/superAdminApi';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
-import AlertButtonTrigger from './AlertButtonTrigger';
 
 type DeleteSuperAdminAlertProps = {
 	data: any;
@@ -32,24 +30,19 @@ const DeleteSuperAdminAlert: FC<DeleteSuperAdminAlertProps> = ({ data }) => {
 	};
 
 	return (
-		<AlertDialog>
-			<AlertDialogTrigger className='w-full'>
-				<AlertButtonTrigger>Delete</AlertButtonTrigger>
-			</AlertDialogTrigger>
-			<AlertDialogContent>
-				<AlertDialogHeader>
-					<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-					<AlertDialogDescription>
-						This action cannot be undone. This will permanently delete the super admin:{' '}
-						{data?.email}
-					</AlertDialogDescription>
-				</AlertDialogHeader>
-				<AlertDialogFooter>
-					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
-				</AlertDialogFooter>
-			</AlertDialogContent>
-		</AlertDialog>
+		<AlertDialogContent>
+			<AlertDialogHeader>
+				<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+				<AlertDialogDescription>
+					This action cannot be undone. This will permanently delete the super admin:{' '}
+					<span className='font-semibold'>{data?.email}</span>
+				</AlertDialogDescription>
+			</AlertDialogHeader>
+			<AlertDialogFooter>
+				<AlertDialogCancel>Cancel</AlertDialogCancel>
+				<AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+			</AlertDialogFooter>
+		</AlertDialogContent>
 	);
 };
 
