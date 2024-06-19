@@ -21,7 +21,7 @@ export const sidebarData: SidebarDataType[] = [
 		label: 'Dashboard',
 	},
 	{
-		link: '/store-config',
+		link: '/store-configs',
 		icon: <LineChart className='h-5 w-5' />,
 		label: 'Store Config',
 	},

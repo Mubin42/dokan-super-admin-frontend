@@ -99,7 +99,7 @@ const StoreConfigPage: FC<StoreConfigPageProps> = ({}) => {
 
 	const buttons = (
 		<div className='ml-auto flex items-center gap-2'>
-			<Link href='/add/super-admin'>
+			<Link href='/add/store-config'>
 				<AddButton title='Add Store Config' />
 			</Link>
 		</div>
