@@ -1,11 +1,13 @@
+import { cn } from '@/lib/utils';
 import React, { FC } from 'react';
 
 type DataFieldsProps = {
 	children?: React.ReactNode;
 	fallback?: string;
+	className?: string;
 };
 
-const DataFields: FC<DataFieldsProps> = ({ children, fallback }) => {
+const DataFields: FC<DataFieldsProps> = ({ children, fallback, className }) => {
 	// api
 
 	// hooks
@@ -22,7 +24,7 @@ const DataFields: FC<DataFieldsProps> = ({ children, fallback }) => {
 
 	// components
 
-	return <h1 className='text-sm font-normal'>{children ? children : fallback}</h1>;
+	return <h1 className={cn('text-sm font-normal', className)}>{children ? children : fallback}</h1>;
 };
 
 export default DataFields;

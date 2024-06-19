@@ -65,7 +65,6 @@ const StoreConfigPage: FC<StoreConfigPageProps> = ({}) => {
 			<TableTitle val='createdAt' onClick={() => handleSort('createdAt')}>
 				Created At
 			</TableTitle>
-			<TableCell>Actions</TableCell>
 		</>
 	);
 
@@ -81,19 +80,6 @@ const StoreConfigPage: FC<StoreConfigPageProps> = ({}) => {
 				}
 			</TableCell>
 			<TableCell>{item?.createdAt && moment(item?.createdAt).calendar()}</TableCell>
-
-			<DropdownMenu>
-				<DropdownMenuTrigger>
-					<ThreeDotsButton />
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align='end'>
-					<DropdownMenuLabel>Actions</DropdownMenuLabel>
-					<DropdownMenuItem>View Details</DropdownMenuItem>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem>Update</DropdownMenuItem>
-					<DropdownMenuItem>Delete</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
 		</TableRow>
 	));
 

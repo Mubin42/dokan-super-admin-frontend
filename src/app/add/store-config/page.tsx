@@ -1,6 +1,6 @@
 'use client';
 import CreatePageLayout from '@/components/layouts/page-layout/CreatePageLayout';
-import { FormLeftRows, FormParentRow, FormSection } from '@/components/sections/forms/form-layout';
+import { FormParentRow, FormSection } from '@/components/sections/forms/form-layout';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -43,10 +43,7 @@ const AddStoreConfig: FC<AddStoreConfigProps> = ({}) => {
 
 	const form = (
 		<FormParentRow singleColumn>
-			<FormSection
-				title='Store Configuration Details'
-				description='Details of store configuration of the given system'
-			>
+			<FormSection title='Store Configuration Details'>
 				<div className='grid gap-3'>
 					<Label>Api Key</Label>
 					<Input
