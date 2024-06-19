@@ -43,26 +43,24 @@ const AddStoreConfig: FC<AddStoreConfigProps> = ({}) => {
 
 	const form = (
 		<FormParentRow singleColumn>
-			<FormLeftRows>
-				<FormSection
-					title='Store Configuration Details'
-					description='Details of store configuration of the given system'
-				>
-					<div className='grid gap-3'>
-						<Label>Api Key</Label>
-						<Input
-							placeholder='eg. 1234567890'
-							value={apiKey}
-							onChange={(e) => setApiKey(e.target.value)}
-						/>
-					</div>
+			<FormSection
+				title='Store Configuration Details'
+				description='Details of store configuration of the given system'
+			>
+				<div className='grid gap-3'>
+					<Label>Api Key</Label>
+					<Input
+						placeholder='eg. 1234567890'
+						value={apiKey}
+						onChange={(e) => setApiKey(e.target.value)}
+					/>
+				</div>
 
-					<div className='grid gap-3'>
-						<Label>Is Active</Label>
-						<Switch checked={isActive} onCheckedChange={(value) => setIsActive(value)} />
-					</div>
-				</FormSection>
-			</FormLeftRows>
+				<div className='grid gap-3'>
+					<Label>Is Active</Label>
+					<Switch checked={isActive} onCheckedChange={(value) => setIsActive(value)} />
+				</div>
+			</FormSection>
 		</FormParentRow>
 	);
 
