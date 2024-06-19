@@ -23,7 +23,7 @@ const TableTopRow: FC<TableTopRowProps> = ({ title, buttons }) => {
 	// components
 
 	return (
-		<div className='flex items-center'>
+		<div className='hidden md:flex items-center'>
 			<h1 className='font-bold text-xl'>{title}</h1>
 			{buttons}
 		</div>

@@ -140,7 +140,7 @@ const Pagination: FC<PaginationProps> = ({ data }) => {
 	);
 
 	return (
-		<div className='flex w-full justify-between'>
+		<div className='hidden md:flex w-full justify-between'>
 			{left}
 			{right}
 		</div>

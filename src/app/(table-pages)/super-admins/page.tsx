@@ -66,20 +66,20 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 			<TableTitle val='email' className='hidden sm:table-cell' onClick={() => handleSort('email')}>
 				Email
 			</TableTitle>
-			<TableTitle val='phone' onClick={() => handleSort('phone')}>
+			<TableTitle val='phone' className='hidden sm:table-cell' onClick={() => handleSort('phone')}>
 				Phone
 			</TableTitle>
 			<TableTitle val='role' onClick={() => handleSort('role')} className='hidden sm:table-cell'>
 				Role
 			</TableTitle>
-			<TableTitle
-				val='isActive'
-				onClick={() => handleSort('isActive')}
-				className='hidden md:table-cell'
-			>
+			<TableTitle val='isActive' onClick={() => handleSort('isActive')}>
 				IsActive
 			</TableTitle>
-			<TableTitle val='createdAt' onClick={() => handleSort('createdAt')}>
+			<TableTitle
+				className='hidden sm:table-cell'
+				val='createdAt'
+				onClick={() => handleSort('createdAt')}
+			>
 				Created At
 			</TableTitle>
 			<TableCell>Actions</TableCell>
@@ -92,11 +92,11 @@ const SuperAdminsPage: FC<SuperAdminsPageProps> = ({}) => {
 				<div className='font-medium'>{item?.name}</div>
 			</TableCell>
 			<TableCell className='hidden sm:table-cell'>{item?.email}</TableCell>
-			<TableCell>{item?.phone || 'Not Available'}</TableCell>
+			<TableCell className='hidden sm:table-cell'>{item?.phone || 'Not Available'}</TableCell>
 			<TableCell className='hidden sm:table-cell'>
 				<Badge variant='outline'>{item?.role}</Badge>
 			</TableCell>
-			<TableCell className='hidden sm:table-cell'>
+			<TableCell>
 				{
 					<Badge className='text-xs' variant={item?.isActive ? 'default' : 'secondary'}>
 						{item?.isActive ? 'Active' : 'Inactive'}
