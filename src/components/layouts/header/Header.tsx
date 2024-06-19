@@ -48,7 +48,7 @@ const Header: FC<HeaderProps> = ({}) => {
 				/>
 			</div>
 			<ModeToggle />
-			{isSuccess && user}
+			{user}
 		</header>
 	);
 };

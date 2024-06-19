@@ -53,11 +53,11 @@ const UpdateSuperAdmin: FC<UpdateSuperAdminProps> = ({}) => {
 	// effects
 	useEffect(() => {
 		if (isSuccess) {
-			setName(data?.name);
-			setEmail(data?.email);
-			setPhone(data?.phone);
-			setRole(data?.role);
-			setIsActive(data?.isActive);
+			setName(data?.doc?.name);
+			setEmail(data?.doc?.email);
+			setPhone(data?.doc?.phone);
+			setRole(data?.doc?.role);
+			setIsActive(data?.doc?.isActive);
 		}
 	}, [data]);
 

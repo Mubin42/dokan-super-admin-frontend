@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type TagType = 'auth' | 'super-admin';
+type TagType = 'auth' | 'super-admin' | 'store-config';
 
-const tags: TagType[] = ['auth', 'super-admin'];
+const tags: TagType[] = ['auth', 'super-admin', 'store-config'];
 
 export const mainApi = createApi({
 	reducerPath: 'mainApi',
