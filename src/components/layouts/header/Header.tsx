@@ -2,29 +2,10 @@ import AccountDropdown from '@/components/sections/account-dropdown/AccountDropd
 import { ModeToggle } from '@/components/sections/mode-toggle/ModeToggle';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-	Sheet,
-	SheetContent,
-	SheetDescription,
-	SheetFooter,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from '@/components/ui/sheet';
+
 import { useGetSelfQuery } from '@/store/services/authApi';
-import { CircleUser, LineChart, Package2, PanelLeft, Search } from 'lucide-react';
-import React, { FC } from 'react';
-import { sidebarData } from '../sidebar/sidebar.data';
-import Link from 'next/link';
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import { Separator } from '@/components/ui/separator';
+import { CircleUser, Search } from 'lucide-react';
+import { FC } from 'react';
 import SidebarSheet from '../sidebar/SidebarSheet';
 
 type HeaderProps = {};

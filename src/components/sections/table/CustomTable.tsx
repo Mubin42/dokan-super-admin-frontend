@@ -39,6 +39,7 @@ const CustomTable: FC<CustomTableProps> = ({
 	// effects
 
 	// components
+
 	const skeleton = Array(5)
 		.fill(0)
 		.map((_, index) => (
