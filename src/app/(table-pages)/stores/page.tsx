@@ -48,6 +48,8 @@ const Stores: FC<StoresProps> = ({}) => {
 	useEffect(() => {
 		dispatch(refresh());
 	}, [dispatch]);
+
+	
 	// components
 	const head = (
 		<>
@@ -57,9 +59,16 @@ const Stores: FC<StoresProps> = ({}) => {
 			<TableTitle val='storeType' onClick={() => handleSort('storeType')}>
 				Store Type
 			</TableTitle>
-			<TableTitle>Email</TableTitle>
-			<TableTitle>Phone</TableTitle>
-			<TableTitle>Created</TableTitle>
+			<TableTitle val='email' onClick={() => handleSort('email')}>
+				Email
+			</TableTitle>
+			<TableTitle val='phone' onClick={() => handleSort('phone')}>
+				Phone
+			</TableTitle>
+			<TableTitle val='createdAt' onClick={() => handleSort('createdAt')}>
+				Created
+			</TableTitle>
+			<TableTitle>Actions</TableTitle>
 		</>
 	);
 
@@ -70,17 +79,19 @@ const Stores: FC<StoresProps> = ({}) => {
 			<TableCell>{item?.contact?.email}</TableCell>
 			<TableCell>{item?.contact?.phone}</TableCell>
 			<TableCell>{item?.createdAt && moment(item?.createdAt).calendar()}</TableCell>
-			<DropdownMenu>
-				<DropdownMenuTrigger>
-					<ThreeDotsButton />
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align='end'>
-					<DropdownMenuLabel>Actions</DropdownMenuLabel>
-					<Link href={`/stores/${item?._id}`}>
-						<DropdownMenuItem>View Details</DropdownMenuItem>
-					</Link>
-				</DropdownMenuContent>
-			</DropdownMenu>
+			<TableCell>
+				<DropdownMenu>
+					<DropdownMenuTrigger>
+						<ThreeDotsButton />
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align='end'>
+						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<Link href={`/stores/${item?._id}`}>
+							<DropdownMenuItem>View Details</DropdownMenuItem>
+						</Link>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</TableCell>
 		</TableRow>
 	));
 
