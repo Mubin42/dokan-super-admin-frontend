@@ -11,6 +11,7 @@ type CreatePageLayoutProps = {
 	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 	successRoute?: string;
 	submitText?: string;
+	isLoading?: boolean;
 };
 
 const CreatePageLayout: FC<CreatePageLayoutProps> = ({
@@ -18,6 +19,7 @@ const CreatePageLayout: FC<CreatePageLayoutProps> = ({
 	children,
 	onSubmit,
 	submitText = 'Save',
+	isLoading = false,
 }) => {
 	// back to previous window
 	const handleBack = () => {
@@ -49,7 +51,7 @@ const CreatePageLayout: FC<CreatePageLayoutProps> = ({
 			<Button variant='outline' size='sm'>
 				Discard
 			</Button>
-			<Button type='submit' size='sm'>
+			<Button type='submit' size='sm' isLoading={isLoading}>
 				Save Product
 			</Button>
 		</div>

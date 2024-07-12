@@ -104,7 +104,11 @@ const AddSuperAdmin: FC<AddSuperAdminProps> = ({}) => {
 	);
 
 	return (
-		<CreatePageLayout title='Add Super Admin' onSubmit={handleSubmit}>
+		<CreatePageLayout
+			title='Add Super Admin'
+			onSubmit={handleSubmit}
+			isLoading={response.isLoading}
+		>
 			{form}
 		</CreatePageLayout>
 	);

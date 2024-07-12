@@ -89,7 +89,7 @@ const Login: FC<LoginProps> = ({}) => {
 								onChange={(e) => setPassword(e.target.value)}
 							/>
 						</div>
-						<Button type='submit' className='w-full'>
+						<Button type='submit' className='w-full' loading={result.isLoading}>
 							Login
 						</Button>
 					</div>

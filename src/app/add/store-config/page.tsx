@@ -62,7 +62,11 @@ const AddStoreConfig: FC<AddStoreConfigProps> = ({}) => {
 	);
 
 	return (
-		<CreatePageLayout title='Add Store Config' onSubmit={handleSubmit}>
+		<CreatePageLayout
+			title='Add Store Config'
+			onSubmit={handleSubmit}
+			isLoading={response.isLoading}
+		>
 			{form}
 		</CreatePageLayout>
 	);
